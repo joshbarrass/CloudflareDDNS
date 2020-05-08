@@ -55,13 +55,10 @@ if __name__ == "__main__":
 
     # check the DNS record every 5 minutes to see
     # if it matches the current external IP
-    while True:
-        dns = get_dns_record(cf, zone, SUBDOMAIN)
-        external_IP = get_external_IP()
-        print("External IP:", external_IP, end="; ")
-        print("DNS Record:", dns["content"])
-        if dns["content"] != external_IP:
-            print("Updating DNS record")
-            update_DNS_IP(cf, dns, external_IP)
-        print("Sleeping...")
-        time.sleep(5 * MINUTE)
+    dns = get_dns_record(cf, zone, SUBDOMAIN)
+    external_IP = get_external_IP()
+    print("External IP:", external_IP, end="; ")
+    print("DNS Record:", dns["content"])
+    if dns["content"] != external_IP:
+        print("Updating DNS record")
+        update_DNS_IP(cf, dns, external_IP)
